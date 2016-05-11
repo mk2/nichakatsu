@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Nichakatsu!</title>
+    <meta name="description" content="2ch viewer">
+
+    <link rel="stylesheet" href="css/app.css">
+
+    <!--
+    mozbrickを使うためのおまじない
+    brick.htmlをインポートすると他のbrickコンポーネントが全てインポートされる
+    -->
+    <script src="bower_components/brick/dist/platform/platform.js"></script>
+    <script src="bower_components/brick/dist/es6-promise/promise.js"></script>
+    <link rel="import" href="bower_components/brick-appbar/dist/brick-appbar.html">
+    <link rel="import" href="bower_components/brick-deck/dist/brick-deck.html">
+    <link rel="import" href="bower_components/brick-layout/dist/brick-layout.html">
+    <link rel="import" href="bower_components/brick-action/dist/brick-action.html">
+    <link rel="import" href="bower_components/brick-storage-indexeddb/dist/brick-storage-indexeddb.html">
+
+    <!--
+      viewport allows you to control how mobile browsers will render your content.
+      width=device-width tells mobile browsers to render your content across the
+      full width of the screen, without being zoomed out (by default it would render
+      it at a desktop width, then shrink it to fit.)
+      Read more about it here:
+      https://developer.mozilla.org/Mozilla/Mobile/Viewport_meta_tag
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1">
+
+    <!--
+    jQueryライブラリ
+    -->
+    <script type="text/javascript" src="js/lib/jquery-2.1.3.min.js" defer></script>
+
+    <!--
+    FirefoxOS周りのもろもろを吸収するためのライブラリ
+    -->
+    <script type="text/javascript" src="js/lib/moz.impl.js" defer></script>
+
+    <!--
+    2ch parser
+    -->
+    <script type="text/javascript" src="js/lib/bbs-2ch-parser.js" defer></script>
+
+    <!--
+    SJIS周り
+    -->
+    <script type="text/javascript" src="node_modules/encoding-japanese/encoding.min.js" defer></script>
+
+    <!--
+    アプリケーションJS。deferで読み込ませる
+    -->
+    <script type="text/javascript" src="js/app.js" defer></script>
+
+    <!--
+    The following two lines are for loading the localisations library
+    and the localisation data-so people can use the app in their
+    own language (as long as you provide translations).
+    -->
+    <link rel="prefetch" type="application/l10n" href="data/locales.ini"/>
+    <script type="text/javascript" src="js/lib/l10n.js" defer></script>
+
+</head>
+<body>
+<h1 data-bind="text: headerTitle"></h1>
+<brick-layout>
+    <header>
+        <brick-action source="menu_toggler" action="toggleDrawer" target="display"></brick-action>
+        <brick-action source="left_card" action="previousCard" target="cards"></brick-action>
+        <brick-action source="left_card" action="closeDrawer" target="display"></brick-action>
+        <brick-action source="right_card" action="nextCard" target="cards"></brick-action>
+        <brick-action source="right_card" action="closeDrawer" target="display"></brick-action>
+        <brick-appbar id="header">
+            <button id="menu_toggler">☰</button>
+            <button id="left_card">←</button>
+            <h1 id="header_title"></h1>
+            <button id="right_card">→</button>
+            <button id="show_settings">⚙</button>
+        </brick-appbar>
+    </header>
+    <brick-layout id="display" flex="" horizontal="">
+        <div id="menu" drawer="">
+            <button id="update_menu">更新</button>
+            <h5>板一覧</h5>
+            <ul>
+            </ul>
+        </div>
+        <brick-deck id="cards" flex="" selected-index="1" loop="">
+            <brick-card>設定</brick-card>
+            <brick-card id="boards">
+                <ul></ul>
+            </brick-card>
+            <brick-card selected id="threads">
+                <ul></ul>
+            </brick-card>
+            <brick-card id="dat">
+                <ul></ul>
+            </brick-card>
+        </brick-deck>
+    </brick-layout>
+</brick-layout>
+</body>
+</html>

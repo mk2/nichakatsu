@@ -1,0 +1,38 @@
+{
+  "version": "0.2.0",
+  "name": "nichakatsu",
+  "csp" : "default-src *; script-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline'",
+  "description": "2ch viewer",
+  "launch_path": "/index.html",
+  "icons": {
+    "16": "/img/icons/icon16x16.png",
+    "48": "/img/icons/icon48x48.png",
+    "60": "/img/icons/icon60x60.png",
+    "128": "/img/icons/icon128x128.png"
+  },
+  "developer": {
+    "name": "mk2",
+    "url": "http://mk2.red"
+  },
+  "type": "privileged",
+  "permissions": {
+    "systemXHR": {
+      "description": "Required to load remote content"
+    }
+  },
+  "installs_allowed_from": [
+    "*"
+  ],
+  "locales": {
+    "jp": {
+      "name": "ニチャカツ！",
+      "description": "2ch 活動！",
+      "permissions": {
+        "systemXHR": {
+          "description": ""
+        }
+      }
+    }
+  },
+  "default_locale": "en"
+}
